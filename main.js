@@ -159,6 +159,46 @@ L.control.scale({
     imperial: false,
 }).addTo(map);
 
+// Instanz Leaflet MiniMap
+var miniMap = new L.Control.MiniMap(
+    L.tileLayer.provider("BasemapAT.basemap"), {
+    toggleDisplay: true,
+    minimized: true
+}
+).addTo(map);
+
+
+// Erstelle eine Basiskarten-Layer (z.B. OpenStreetMap)
+var osm2 = new L.TileLayer(osmUrl, {
+    minZoom: 0,
+    maxZoom: 13,
+    attribution: osmAttrib
+  });
+  
+  // Füge die Basiskarte zur Karte hinzu
+  osm2.addTo(map);
+  
+  // Erstelle eine Instanz der Minimap
+  var miniMap = new L.Control.MiniMap(osm2, {
+    position: 'bottomright', // Positioniere die Minimap unten rechts
+    width: '150px',
+    height: '150px',
+    toggleDisplay: true,
+    zoomLevelOffset: -5
+  });
+  
+  // Füge die Minimap zur Karte hinzu
+  miniMap.addTo(map);
+  
+
+
+
+
+
+
+
+
+
 // //GPX-Track visualisieren -> Höhenprofile (es sind noch nicht alle)
 // let controlElevation = L.control.elevation({
 //     time: false,
