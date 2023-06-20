@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>BikeBuddies</title>
+
+    <!-- Disable unwanted scaling of page -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- favicon (Icon im Tab)-->
+    <link rel="shortcut icon" href="icons/tab_cycle.png" type="image/x-icon">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
+    <!-- Leaflet Providers -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-providers/1.13.0/leaflet-providers.min.js"
+        integrity="sha512-5EYsvqNbFZ8HX60keFbe56Wr0Mq5J1RrA0KdVcfGDhnjnzIRsDrT/S3cxdzpVN2NGxAB9omgqnlh4/06TvWCMw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!--Leaflet Fullscreen-->
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css'
+        rel='stylesheet' />
+
+    <!-- Leaflet GPX-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
+
+    <!-- Leaflet Elevation -->
+    <link rel="stylesheet" href="https://unpkg.com/@raruto/leaflet-elevation/dist/leaflet-elevation.css" />
+    <script src="https://unpkg.com/@raruto/leaflet-elevation/dist/leaflet-elevation.js"></script>
+
+    <!-- eigene Stile und Hauptskript -->
+    <link rel="stylesheet" href="main.css">
+    <script defer src="main.js"></script>
+
+    <!-- Verlinkung zu Pulldown.js-->
+    <script src="dropdown.js"></script>
+
+</head>
+
+<nav id="pulldown">
+    <ul>
+        <li><a href="https://bikebuddies.github.io/start">Startseite</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle">Touren</a>
+            <ul class="dropdown-menu">
+                <li><a href="https://bikebuddies.github.io/burgenland">Burgenland</a></li>
+                <li><a href="https://bikebuddies.github.io/niederoesterreich1/">Niederösterreich</a></li>
+                <li><a href="https://bikebuddies.github.io/wien">Wien</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Verleih</a></li>
+        <li><a href="#">Unterkunft</a></li>
+        <li><a href="#">Impressum</a></li>
+    </ul>
+</nav>
+
+<body>
+    <main>
+        <header>
+            <h1><i class="fa-solid fa-person-biking"></i> BikeBuddies</h1> <br>
+            <h2>Radfahren in Wien</h2>
+            <nav>
+                <i class="fab fa-github"></i> <a href="https://github.com/bikebuddies/start">Github</a>
+            </nav>
+        </header>
+        <article>
+            <p>
+                Hier findet ihr unsere Top 10 Radrouten für das Burgenland. Im Pulldown Menü können die einzelnen
+                Routen ausgewählt und weitere Infos auf den jeweiligen Websites nachgeschaut werden.
+            </p>
+            <h3>Karte mit den Top 10 Radrouten des Burgenlandes</h3>
+            <select name="pulldown" id="pulldown"></select>
+
+            <div id="map"></div>
+            <div id="profile"></div>
+
+        </article>
+        <footer>
+            <strong>Quelle:</strong>
+            <nav>
+                <!-- Quellen für der gpx-Tracks angeben-->
+                <!-- <a href="https://leafletjs.com/examples/mobile/">Leaflet on Mobile Tutorial</a> -->
+            </nav>
+            <p>
+                BikeBuddies ist ein Gruppenprojekt im Rahmen der VU Geoinformatik: Web mapping am Institut
+                für Geographie an der Universität Innsbruck.
+            </p>
+        </footer>
+    </main>
+</body>
+
+</html>
