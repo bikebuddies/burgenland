@@ -1,4 +1,4 @@
-/* Code von Vienna mobile Beispiel */
+/* Code von Burgenland mobile Beispiel */
 
 // Zentrum Karte Objekt
 let stpolten = {

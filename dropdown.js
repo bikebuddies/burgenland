@@ -1,3 +1,5 @@
+/* Code von Burgenland Dropdown-Menü */
+
 document.addEventListener("DOMContentLoaded", function() {
     var dropdown = document.querySelector(".dropdown");
     var dropdownMenu = dropdown.querySelector(".dropdown-menu");
