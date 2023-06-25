@@ -167,37 +167,34 @@ var miniMap = new L.Control.MiniMap(
 }
 ).addTo(map);
 
-
 // Erstelle eine Basiskarten-Layer (z.B. OpenStreetMap)
 var osm2 = new L.TileLayer(osmUrl, {
     minZoom: 0,
     maxZoom: 13,
     attribution: osmAttrib
-  });
-  
-  // Füge die Basiskarte zur Karte hinzu
-  osm2.addTo(map);
-  
-  // Erstelle eine Instanz der Minimap
-  var miniMap = new L.Control.MiniMap(osm2, {
+});
+
+// Füge die Basiskarte zur Karte hinzu
+osm2.addTo(map);
+
+// Erstelle eine Instanz der Minimap
+var miniMap = new L.Control.MiniMap(osm2, {
     position: 'bottomright', // Positioniere die Minimap unten rechts
     width: '150px',
     height: '150px',
     toggleDisplay: true,
     zoomLevelOffset: -5
-  });
-  
-  // Füge die Minimap zur Karte hinzu
-  miniMap.addTo(map);
-  
+});
 
+// Füge die Minimap zur Karte hinzu
+miniMap.addTo(map);
 
-
-
-
-
-
-
+//Geolocation (Funktioniert noch nicht!!!)
+map.locate({
+    setView: true,
+    maxZoom: 16,
+    watch: true,
+});
 
 // //GPX-Track visualisieren -> Höhenprofile (es sind noch nicht alle)
 // let controlElevation = L.control.elevation({
@@ -275,26 +272,3 @@ pulldown.onchange = function(evt) {
 }
 */
 
-/* Geolocation würd ich auf der Übersichtskarte weglassen, damit es wirklich nur eine Übersicht wird.
-map.locate({
-    setView: true,
-    watch: true, 
-    maxZoom: 16
-});
-
-let circle = L.circle([0, 0], 0).addTo(map);
-let marker = L.marker([0, 0], 0).addTo(map);
-
-map.on('locationfound', function onLocationFound(evt) {
-    console.log(evt);
-    let radius = Math.round(evt.accuracy);
-    marker.setLatLng(evt.latlng);
-    marker.bindTooltip(`You are within ${radius} meters from this point`).openTooltip();
-    circle.setLatLng(evt.latlng);
-    circle.setRadius(radius);
-});
-
-map.on('locationerror', function onLocationError(evt) {
-    alert(evt.message);
-});
-*/
