@@ -1,162 +1,43 @@
-/* Code von Burgenland mobile Beispiel */
-
 // Zentrum Karte Objekt
-let stpolten = {
-    lat: 48.33001133291213,
-    lng: 16.060959034595086,
-    title: "St. Pölten, Niederösterreich"
+let steinberg = {
+    lat: 47.4744090679682,
+    lng: 16.487984334978034,
 }
 
 // Karte initialisieren und Fullscreen Control 
 let map = L.map("map", {
     fullscreenControl: true
 }).setView([
-    stpolten.lat, stpolten.lng
-], 7.5);
+    steinberg.lat, steinberg.lng
+], 8.5);
 
 // thematische Layer
 let themaLayer = {
-    kampThayaMarch: L.featureGroup(),
-    piestingtal: L.featureGroup(),
-    thayarunde: L.featureGroup(),
-    traisental: L.featureGroup(),
-    triestingGoelsental: L.featureGroup(),
-    triestingau: L.featureGroup(),
-    ybbstal: L.featureGroup(),
-    eurovelo6: L.featureGroup(),
-    eurovelo9: L.featureGroup(),
-    eurovelo13: L.featureGroup(),
+    rosalia: L.featureGroup(),
+    festival: L.featureGroup(),
+    ironCurtain: L.featureGroup(),
+    paradies: L.featureGroup(),
+    jubilaeum: L.featureGroup(),
+    forecast: L.featureGroup(),
+    badeseen: L.featureGroup(),
 }
 
+
+
 // Hintergrundlayer 
-//noch den schöneren von der Hauptkarte einfügen, wenn wir das geschafft haben 
 let eGrundkarteNiederoesterreich = L.control.layers({
-    "OpenStreetMap": L.tileLayer.provider("OpenStreetMap.DE").addTo(map),
-    "OpenTopoMap": L.tileLayer.provider("OpenTopoMap"),
+    "Terrain": L.tileLayer.provider("Stamen.Terrain").addTo(map),
+    "BasemapÖsterreich": L.tileLayer.provider("BasemapAT.grau"),
+    "StamenB/W": L.tileLayer.provider("Stamen.TonerLite"),
     "CycleTrails": L.tileLayer.provider("CyclOSM"),
 }, {
-    "Kamp-Thaya-March-Radweg": themaLayer.kampThayaMarch.addTo(map),
-    "Piestingtal-Radweg": themaLayer.piestingtal.addTo(map),
-    "Thayarunde": themaLayer.thayarunde.addTo(map),
-    "Traisental-Radweg": themaLayer.traisental.addTo(map),
-    "Triesting-Gölsental-Radweg": themaLayer.triestingGoelsental.addTo(map),
-    "Triestingau-Radweg": themaLayer.triestingau.addTo(map),
-    "Ybbstal-Radweg": themaLayer.ybbstal.addTo(map),
-    "Eurovelo-Radweg Nr. 6": themaLayer.eurovelo6.addTo(map),
-    "Eurovelo-Radweg Nr. 9": themaLayer.eurovelo9.addTo(map),
-    "Eurovelo-Radweg Nr. 13": themaLayer.eurovelo13.addTo(map),
-}).addTo(map);
-
-
-var gpx = './data/niederoesterreich/kamp_thaya_march.gpx';
-new L.GPX(gpx, { async: true }, {
-    //Polylinien stylen funktioniert noch nicht, marker ausschalten auch nicht
-    polyline_options: [{
-        color: `#76eec6`,
-        opacity: 0.75,
-        weight: 3
-    }, {
-        color: `#76eec6`,
-        opacity: 0.75,
-        weight: 3
-    }]
-}, {
-    marker_options: {
-        startIconUrl: false,
-        endIconUrl: false,
-        shadowUrl: false
-    }
-}).on('loaded', function (e) {
-    //   map.fitBounds(e.target.getBounds());
-}).addTo(themaLayer.kampThayaMarch);
-
-var gpx = './data/niederoesterreich/piestingtal.gpx';
-new L.GPX(gpx, { async: true }).on('loaded', function (e) {
-    //   map.fitBounds(e.target.getBounds());
-}).addTo(themaLayer.piestingtal);
-
-var gpx = './data/niederoesterreich/thayarunde.gpx';
-new L.GPX(gpx, { async: true }).on('loaded', function (e) {
-    //   map.fitBounds(e.target.getBounds());
-}).addTo(themaLayer.thayarunde);
-
-var gpx = './data/niederoesterreich/traisentalweg.gpx';
-new L.GPX(gpx, { async: true }).on('loaded', function (e) {
-    //   map.fitBounds(e.target.getBounds());
-}).addTo(themaLayer.traisental);
-
-var gpx = './data/niederoesterreich/triesting_goelsental.gpx';
-new L.GPX(gpx, { async: true }).on('loaded', function (e) {
-    //   map.fitBounds(e.target.getBounds());
-}).addTo(themaLayer.triestingGoelsental);
-
-var gpx = './data/niederoesterreich/triestingau.gpx';
-new L.GPX(gpx, { async: true }).on('loaded', function (e) {
-    //   map.fitBounds(e.target.getBounds());
-}).addTo(themaLayer.triestingau);
-
-var gpx = './data/niederoesterreich/ybbstalradweg.gpx';
-new L.GPX(gpx, { async: true }).on('loaded', function (e) {
-    //   map.fitBounds(e.target.getBounds());
-}).addTo(themaLayer.ybbstal);
-
-var gpx = './data/eurovelo6.gpx';
-new L.GPX(gpx, { async: true }).on('loaded', function (e) {
-    //   map.fitBounds(e.target.getBounds());
-}).addTo(themaLayer.eurovelo6);
-
-var gpx = './data/eurovelo9.gpx';
-new L.GPX(gpx, { async: true }).on('loaded', function (e) {
-    //   map.fitBounds(e.target.getBounds());
-}).addTo(themaLayer.eurovelo9);
-
-var gpx = './data/eurovelo13.gpx';
-new L.GPX(gpx, { async: true }).on('loaded', function (e) {
-    //   map.fitBounds(e.target.getBounds());
-}).addTo(themaLayer.eurovelo13);
-
-//Eurovelos erscheinen noch nicht
-
-// Marker der größten Städte
-const STAEDTE = [
-    {
-        title: "St. Pölten, Niederösterreich",
-        lat: 48.18735,
-        lng: 15.64139,
-        wikipedia: "https://de.wikipedia.org/wiki/St._P%C3%B6lten"//Links raus oder anpassen?
-    },
-    {
-        title: "Tulln",
-        lat: 48.33001133291213,
-        lng: 16.060959034595086,
-        wikipedia: "https://de.wikipedia.org/wiki/Wien" //Links raus oder anpassen?
-    },
-    {
-        title: "Krems a.d. Donau",
-        lat: 48.41022698533108,
-        lng: 15.60382006192799,
-        wikipedia: "https://de.wikipedia.org/wiki/Eisenstadt"//Links raus oder anpassen?
-    },
-    {
-        title: "Baden bei Wien",
-        lat: 48.0024595018188,
-        lng: 16.230795040395048,
-        wikipedia: "https://de.wikipedia.org/wiki/Eisenstadt"//Links raus oder anpassen?
-    },
-]
-
-for (let stadt of STAEDTE) {
-    //Marker für den Stopp
-    let marker = L.marker([stadt.lat, stadt.lng])
-        .addTo(map)
-        .bindPopup(`${stadt.title} <br>
-    <a href="${stop.wikipedia}">Wikipedia</a>
-    `)
-};
-
-// Maßstab
-L.control.scale({
-    imperial: false,
+    "Rosalia-Radweg": themaLayer.rosalia.addTo(map),
+    "Festival-Radweg": themaLayer.festival.addTo(map),
+    "Iron-Curtain-Radweg": themaLayer.ironCurtain.addTo(map),
+    "Paradies-Radweg": themaLayer.paradies.addTo(map),
+    "Jubiläum-Radweg": themaLayer.jubilaeum.addTo(map),
+    "Wettervorhersage MET Norwag": themaLayer.forecast,
+    "Badeseen": themaLayer.badeseen,
 }).addTo(map);
 
 // Instanz Leaflet MiniMap
@@ -166,28 +47,6 @@ var miniMap = new L.Control.MiniMap(
     minimized: true
 }
 ).addTo(map);
-
-// Erstelle eine Basiskarten-Layer (z.B. OpenStreetMap)
-var osm2 = new L.TileLayer(osmUrl, {
-    minZoom: 0,
-    maxZoom: 13,
-    attribution: osmAttrib
-});
-
-// Füge die Basiskarte zur Karte hinzu
-osm2.addTo(map);
-
-// Erstelle eine Instanz der Minimap
-var miniMap = new L.Control.MiniMap(osm2, {
-    position: 'bottomright', // Positioniere die Minimap unten rechts
-    width: '150px',
-    height: '150px',
-    toggleDisplay: true,
-    zoomLevelOffset: -5
-});
-
-// Füge die Minimap zur Karte hinzu
-miniMap.addTo(map);
 
 //Geolocation
 map.locate({
@@ -215,59 +74,269 @@ map.on('locationerror', function (evt) {
     }
 });
 
-// //GPX-Track visualisieren -> Höhenprofile (es sind noch nicht alle)
-// let controlElevation = L.control.elevation({
-//     time: false,
-//     elevationDiv: "#profile",
-//     height: 300,
-//     theme: "Radtouren Niederösterreich"
-// }).addTo(themaLayer.route);
-// controlElevation.load("data/niederoesterreich/piestingtal.gpx");
+// Wettervorhersage MET Norway
+async function showForecast(url, latlng) {
+    let response = await fetch(url);
+    let jsondata = await response.json();
 
-// //GPX-Track visualisieren
-// let controlElevation1 = L.control.elevation({
-//     time: false,
-//     elevationDiv: "#profile",
-//     height: 300,
-//     theme: "Radtouren Niederösterreich"
-// }).addTo(themaLayer.route);
-// controlElevation1.load("data/niederoesterreich/kamp_thaya_march.gpx")
+    let current = jsondata.properties.timeseries[0].data.instant.details;
 
-// //GPX-Track visualisieren
-// let controlElevation2 = L.control.elevation({
-//     time: false,
-//     elevationDiv: "#profile",
-//     height: 300,
-//     theme: "Radtouren Niederösterreich"
-// }).addTo(themaLayer.route);
-// controlElevation2.load("data/niederoesterreich/thayarunde.gpx")
+    let timestamp = new Date(jsondata.properties.meta.updated_at).toLocaleString();
 
-// //GPX-Track visualisieren
-// let controlElevation3 = L.control.elevation({
-//     time: false,
-//     elevationDiv: "#profile",
-//     height: 300,
-//     theme: "Radtouren Niederösterreich"
-// }).addTo(themaLayer.route);
-// controlElevation3.load("data/niederoesterreich/traisentalweg.gpx")
+    let timeseries = jsondata.properties.timeseries;
 
-// //GPX-Track visualisieren
-// let controlElevation4 = L.control.elevation({
-//     time: false,
-//     elevationDiv: "#profile",
-//     height: 300,
-//     theme: "Radtouren Niederösterreich"
-// }).addTo(themaLayer.route);
-// controlElevation4.load("triesting_goelsental.gpx")
+    let markup = `
+        <h4>Wetter für ${latlng.lat.toFixed(4)}, ${latlng.lng.toFixed(4)} (${timestamp})</h4>
+        <table>
+            <tr><td>Lufttemperatur (C)</td><td>${current.air_temperature}</td></tr>
+            <tr><td>Bewölkungsgrad (%)</td><td>${current.cloud_area_fraction}</td></tr>
+            <tr><td>Luftfeuchtigkeit (%)</td><td>${current.relative_humidity}</td></tr>
+            <tr><td>Windrichtung (°)</td><td>${current.wind_from_direction}</td></tr>
+            <tr><td>Windgeschwindigkeit (m/s)</td><td>${current.wind_speed}</td></tr>
+        </table>
+    `;
 
-// //GPX-Track visualisieren
-// let controlElevation5 = L.control.elevation({
-//     time: false,
-//     elevationDiv: "#profile",
-//     height: 300,
-//     theme: "Radtouren Niederösterreich"
-// }).addTo(themaLayer.route);
-// controlElevation5.load("data/niederoesterreich/traisentalweg.gpx")
+    // Wettersymbole hinzufügen
+    for (let i = 0; i <= 24; i += 3) {
+        //console.log(timeseries[i]);
+        let icon = timeseries[i].data.next_1_hours.summary.symbol_code;
+        let img = `icons/${icon}.svg`;
+        markup += `<img src="${img}" style="width:32px;" title="${timeseries[i].time.toLocaleString()}">`
+        //console.log(icon, img);
+    }
+    L.popup().setLatLng(latlng).setContent(markup).openOn(themaLayer.forecast);
+}
+
+// Wettervorhersage auf Kartenklick reagieren (Event via map.on)
+map.on("click", function (evt) {
+    console.log(evt);
+    let url = `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${evt.latlng.lat}&lon=${evt.latlng.lng}`;
+    showForecast(url, evt.latlng);
+});
+
+
+//Festival-Radweg
+var gpx = './data/festival.gpx';
+let festival = new L.GPX(gpx, {
+    polyline_options: {
+        color: '#8D021F',
+        opacity: 0.75,
+        weight: 3
+    },
+    marker_options: {
+        startIconUrl: "icons/tab_cycle.png",
+        endIconUrl: false,
+        shadowUrl: false,
+        wptIconUrls: false
+    }
+}).addTo(themaLayer.festival);
+
+// GPX Track visualisieren aus https://raruto.github.io/leaflet-elevation/
+festival.on("click", function (evt) {
+    let controlElevation = L.control.elevation({
+        time: false,
+        elevationDiv: "#profile",
+        height: 300,
+        theme: "festival"
+    }).addTo(map);
+    // Load track from url (allowed data types: "*.geojson", "*.gpx", "*.tcx")
+    controlElevation.load("./data/festival.gpx")
+});
+
+//Iron-Curtain-Radweg
+var gpx = './data/ironCurtain.gpx';
+let ironCurtain = new L.GPX(gpx, {
+    polyline_options: {
+        color: '#CD5C5C',
+        opacity: 0.75,
+        weight: 3
+    },
+    marker_options: {
+        startIconUrl: "icons/tab_cycle.png",
+        endIconUrl: false,
+        shadowUrl: false,
+        wptIconUrls: false
+    }
+}).addTo(themaLayer.ironCurtain);
+// GPX Track visualisieren aus https://raruto.github.io/leaflet-elevation/
+ironCurtain.on("click", function (evt) {
+    let controlElevation = L.control.elevation({
+        time: false,
+        elevationDiv: "#profile",
+        height: 300,
+        theme: "ironCurtain"
+    }).addTo(map);
+    // Load track from url (allowed data types: "*.geojson", "*.gpx", "*.tcx")
+    controlElevation.load("./data/ironCurtain.gpx")
+});
+
+//Jubiläum-Radweg
+var gpx = './data/jubilaeum.gpx';
+let jubilaeum = new L.GPX(gpx, {
+    polyline_options: {
+        color: '#E0115F',
+        opacity: 0.75,
+        weight: 3
+    },
+    marker_options: {
+        startIconUrl: "icons/tab_cycle.png",
+        endIconUrl: false,
+        shadowUrl: false,
+        wptIconUrls: false
+    }
+}).addTo(themaLayer.jubilaeum);
+// GPX Track visualisieren aus https://raruto.github.io/leaflet-elevation/
+jubilaeum.on("click", function (evt) {
+    let controlElevation = L.control.elevation({
+        time: false,
+        elevationDiv: "#profile",
+        height: 300,
+        theme: "jubilaeum"
+    }).addTo(map);
+    // Load track from url (allowed data types: "*.geojson", "*.gpx", "*.tcx")
+    controlElevation.load("./data/jubilaeum.gpx")
+});
+
+
+//Rosalia-Radweg
+var gpx = './data/rosalia.gpx';
+let rosalia = new L.GPX(gpx, {
+    polyline_options: {
+        color: '#FF0800',
+        opacity: 0.75,
+        weight: 3
+    },
+    marker_options: {
+        startIconUrl: "icons/tab_cycle.png",
+        endIconUrl: false,
+        shadowUrl: false,
+        wptIconUrls: false
+    }
+}).addTo(themaLayer.rosalia);
+// GPX Track visualisieren aus https://raruto.github.io/leaflet-elevation/
+rosalia.on("click", function (evt) {
+    let controlElevation = L.control.elevation({
+        time: false,
+        elevationDiv: "#profile",
+        height: 300,
+        theme: "rosalia"
+    }).addTo(map);
+    // Load track from url (allowed data types: "*.geojson", "*.gpx", "*.tcx")
+    controlElevation.load("./data/rosalia.gpx")
+});
+
+//Paradies-Radweg
+var gpx = './data/paradies.gpx';
+let paradies = new L.GPX(gpx, {
+    polyline_options: {
+        color: '#FF0800',
+        opacity: 0.75,
+        weight: 3
+    },
+    marker_options: {
+        startIconUrl: "icons/tab_cycle.png",
+        endIconUrl: false,
+        shadowUrl: false,
+        wptIconUrls: false
+    }
+}).addTo(themaLayer.paradies);
+// GPX Track visualisieren aus https://raruto.github.io/leaflet-elevation/
+paradies.on("click", function (evt) {
+    let controlElevation = L.control.elevation({
+        time: false,
+        elevationDiv: "#profile",
+        height: 300,
+        theme: "paradies"
+    }).addTo(map);
+    // Load track from url (allowed data types: "*.geojson", "*.gpx", "*.tcx")
+    controlElevation.load("./data/paradies.gpx")
+});
+
+// Marker der größten Städte
+const STAEDTE = [
+    {
+        title: "Eisenstadt",
+        lat: 47.84651920035177,
+        lng: 16.52731717127831,
+        wikipedia: "https://de.wikipedia.org/wiki/Eisenstadt"//Links raus oder anpassen?
+    },
+    {
+        title: "Neusiedl am See",
+        lat: 47.94831935218377,
+        lng: 16.850801413360713,
+        wikipedia: "https://de.wikipedia.org/wiki/Neusiedl_am_See" //Links raus oder anpassen?
+    },
+    {
+        title: "Oberwart",
+        lat: 47.29477213220548,
+        lng: 16.200854006181853,
+        wikipedia: "https://de.wikipedia.org/wiki/Oberwart"//Links raus oder anpassen?
+    },
+    {
+        title: "Pinkafeld",
+        lat: 47.374107766607914,
+        lng: 16.123038801200657,
+        wikipedia: "https://de.wikipedia.org/wiki/Pinkafeld"//Links raus oder anpassen?
+    },
+]
+
+for (let stadt of STAEDTE) {
+    //Marker für den Stopp
+    let marker = L.marker([stadt.lat, stadt.lng])
+        .addTo(map)
+        .bindPopup(`${stadt.title} <br>
+    <a href="${stop.wikipedia}">Wikipedia</a>
+    `)
+};
+
+//Badeseen
+const BADESEEN = [
+    {
+        title: "Neusiedler See",
+        lat: 47.861670077756585,
+        lng: 16.766234356776703
+    },
+    {
+        title: "Römersee",
+        lat: 47.76228947258584,
+        lng: 16.346584741278356
+    },
+    {
+        title: "Badeparadies Burg",
+        lat: 47.21698496322752,
+        lng: 16.41073338918724
+    },
+    {
+        title: "Naturbadesee Königsdorf",
+        lat: 47.00899491536701,
+        lng: 16.16288813573165
+    },
+    {
+        title: "Sonnensee Ritzing",
+        lat: 47.63005232247246,
+        lng: 16.470865861482007
+    }
+];
+
+for (let badeseen of BADESEEN) {
+    L.marker([badeseen.lat, badeseen.lng], {
+        icon: L.icon({
+            iconUrl: `icons/swimming.png`,
+            popupAnchor: [0, -37],
+            iconAnchor: [16, 37],
+        })
+    })
+        .addTo(themaLayer.badeseen)
+        .bindPopup(`<b>${badeseen.title}</b> <br>
+    `)
+};
+
+// Maßstab
+L.control.scale({
+    imperial: false,
+}).addTo(map);
+
+
 
 //Kommentare aus der start-Seite
 /* Pulldownmenü Code
@@ -290,4 +359,3 @@ pulldown.onchange = function(evt) {
     window.location.href = url;
 }
 */
-
