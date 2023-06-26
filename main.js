@@ -189,11 +189,25 @@ var miniMap = new L.Control.MiniMap(osm2, {
 // Füge die Minimap zur Karte hinzu
 miniMap.addTo(map);
 
-//Geolocation (Funktioniert noch nicht!!!)
+//Geolocation
 map.locate({
-    setView: true,
+    setView: false,
     maxZoom: 16,
     watch: true,
+});
+
+let circle = L.circle([0, 0], 0).addTo(map);
+
+map.on('locationfound', function (evt) {
+    let radius = Math.round(evt.accuracy);
+    L.circle(evt.latlng, radius).addTo(map);
+    circle.setLatLng(evt.latlng);
+    circle.setRadius(radius);
+}
+);
+
+map.on('locationerror', function (evt) {
+    alert(evt.message);
 });
 
 // //GPX-Track visualisieren -> Höhenprofile (es sind noch nicht alle)
