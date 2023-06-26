@@ -22,8 +22,6 @@ let themaLayer = {
     badeseen: L.featureGroup(),
 }
 
-
-
 // Hintergrundlayer 
 let eGrundkarteNiederoesterreich = L.control.layers({
     "Terrain": L.tileLayer.provider("Stamen.Terrain").addTo(map),
@@ -116,7 +114,7 @@ map.on("click", function (evt) {
 
 
 //Festival-Radweg
-var gpx = './data/festival.gpx';
+var gpx = './data/t13233619_festival-radweg.gpx';
 let festival = new L.GPX(gpx, {
     polyline_options: {
         color: '#8D021F',
@@ -140,11 +138,11 @@ festival.on("click", function (evt) {
         theme: "festival"
     }).addTo(map);
     // Load track from url (allowed data types: "*.geojson", "*.gpx", "*.tcx")
-    controlElevation.load("./data/festival.gpx")
+    controlElevation.load("./data/t13233619_festival-radweg.gpx")
 });
 
 //Iron-Curtain-Radweg
-var gpx = './data/ironCurtain.gpx';
+var gpx = './data/t11583475_iron curtain trail -.gpx';
 let ironCurtain = new L.GPX(gpx, {
     polyline_options: {
         color: '#CD5C5C',
@@ -167,11 +165,11 @@ ironCurtain.on("click", function (evt) {
         theme: "ironCurtain"
     }).addTo(map);
     // Load track from url (allowed data types: "*.geojson", "*.gpx", "*.tcx")
-    controlElevation.load("./data/ironCurtain.gpx")
+    controlElevation.load("./data/t11583475_iron curtain trail -.gpx")
 });
 
 //Jubiläum-Radweg
-var gpx = './data/jubilaeum.gpx';
+var gpx = './data/t3790807_r1 jubilaeumsradweg.gpx';
 let jubilaeum = new L.GPX(gpx, {
     polyline_options: {
         color: '#E0115F',
@@ -194,12 +192,12 @@ jubilaeum.on("click", function (evt) {
         theme: "jubilaeum"
     }).addTo(map);
     // Load track from url (allowed data types: "*.geojson", "*.gpx", "*.tcx")
-    controlElevation.load("./data/jubilaeum.gpx")
+    controlElevation.load("./data/t3790807_r1 jubilaeumsradweg.gpx")
 });
 
 
 //Rosalia-Radweg
-var gpx = './data/rosalia.gpx';
+var gpx = './data/t2806010_b32 rosalia-radwanderweg.gpx';
 let rosalia = new L.GPX(gpx, {
     polyline_options: {
         color: '#FF0800',
@@ -222,11 +220,11 @@ rosalia.on("click", function (evt) {
         theme: "rosalia"
     }).addTo(map);
     // Load track from url (allowed data types: "*.geojson", "*.gpx", "*.tcx")
-    controlElevation.load("./data/rosalia.gpx")
+    controlElevation.load("./data/t2806010_b32 rosalia-radwanderweg.gpx")
 });
 
 //Paradies-Radweg
-var gpx = './data/paradies.gpx';
+var gpx = './data/t10062687_paradiesroute.gpx';
 let paradies = new L.GPX(gpx, {
     polyline_options: {
         color: '#FF0800',
@@ -249,7 +247,7 @@ paradies.on("click", function (evt) {
         theme: "paradies"
     }).addTo(map);
     // Load track from url (allowed data types: "*.geojson", "*.gpx", "*.tcx")
-    controlElevation.load("./data/paradies.gpx")
+    controlElevation.load("./data/t10062687_paradiesroute.gpx")
 });
 
 // Marker der größten Städte
