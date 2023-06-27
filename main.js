@@ -23,9 +23,8 @@ let themaLayer = {
 }
 
 // Hintergrundlayer 
-let eGrundkarteNiederoesterreich = L.control.layers({
-    "Terrain": L.tileLayer.provider("Stamen.Terrain").addTo(map),
-    "BasemapÖsterreich": L.tileLayer.provider("BasemapAT.grau"),
+let layerControl = L.control.layers({
+    "BasemapÖsterreich": L.tileLayer.provider("BasemapAT.grau").addTo(map),
     "StamenB/W": L.tileLayer.provider("Stamen.TonerLite"),
     "CycleTrails": L.tileLayer.provider("CyclOSM"),
 }, {
