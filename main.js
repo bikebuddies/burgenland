@@ -9,7 +9,7 @@ let map = L.map("map", {
     fullscreenControl: true
 }).setView([
     steinberg.lat, steinberg.lng
-], 8.5);
+], 8);
 
 // thematische Layer
 let themaLayer = {
@@ -23,9 +23,8 @@ let themaLayer = {
 }
 
 // Hintergrundlayer 
-let eGrundkarteNiederoesterreich = L.control.layers({
-    "Terrain": L.tileLayer.provider("Stamen.Terrain").addTo(map),
-    "BasemapÖsterreich": L.tileLayer.provider("BasemapAT.grau"),
+let layerControl = L.control.layers({
+    "BasemapÖsterreich": L.tileLayer.provider("BasemapAT.grau").addTo(map),
     "StamenB/W": L.tileLayer.provider("Stamen.TonerLite"),
     "CycleTrails": L.tileLayer.provider("CyclOSM"),
 }, {
@@ -38,11 +37,14 @@ let eGrundkarteNiederoesterreich = L.control.layers({
     "Badeseen": themaLayer.badeseen,
 }).addTo(map);
 
+// Layer beim Besuch auf der Seite ausklappen
+layerControl.expand();
+
 // Instanz Leaflet MiniMap
 var miniMap = new L.Control.MiniMap(
     L.tileLayer.provider("BasemapAT.basemap"), {
     toggleDisplay: true,
-    minimized: true
+    minimized: false
 }
 ).addTo(map);
 
@@ -96,11 +98,9 @@ async function showForecast(url, latlng) {
 
     // Wettersymbole hinzufügen
     for (let i = 0; i <= 24; i += 3) {
-        //console.log(timeseries[i]);
         let icon = timeseries[i].data.next_1_hours.summary.symbol_code;
         let img = `icons/${icon}.svg`;
         markup += `<img src="${img}" style="width:32px;" title="${timeseries[i].time.toLocaleString()}">`
-        //console.log(icon, img);
     }
     L.popup().setLatLng(latlng).setContent(markup).openOn(themaLayer.forecast);
 }
@@ -256,25 +256,25 @@ const STAEDTE = [
         title: "Eisenstadt",
         lat: 47.84651920035177,
         lng: 16.52731717127831,
-        wikipedia: "https://de.wikipedia.org/wiki/Eisenstadt"//Links raus oder anpassen?
+        wikipedia: "https://de.wikipedia.org/wiki/Eisenstadt"
     },
     {
         title: "Neusiedl am See",
         lat: 47.94831935218377,
         lng: 16.850801413360713,
-        wikipedia: "https://de.wikipedia.org/wiki/Neusiedl_am_See" //Links raus oder anpassen?
+        wikipedia: "https://de.wikipedia.org/wiki/Neusiedl_am_See"
     },
     {
         title: "Oberwart",
         lat: 47.29477213220548,
         lng: 16.200854006181853,
-        wikipedia: "https://de.wikipedia.org/wiki/Oberwart"//Links raus oder anpassen?
+        wikipedia: "https://de.wikipedia.org/wiki/Oberwart"
     },
     {
         title: "Pinkafeld",
         lat: 47.374107766607914,
         lng: 16.123038801200657,
-        wikipedia: "https://de.wikipedia.org/wiki/Pinkafeld"//Links raus oder anpassen?
+        wikipedia: "https://de.wikipedia.org/wiki/Pinkafeld"
     },
 ]
 
@@ -282,7 +282,7 @@ for (let stadt of STAEDTE) {
     //Marker für den Stopp
     let marker = L.marker([stadt.lat, stadt.lng])
         .addTo(map)
-        .bindPopup(`${stadt.title} <br>
+        .bindPopup(`<b>${stadt.title}</b> <br>
     <a href="${stop.wikipedia}">Wikipedia</a>
     `)
 };
@@ -333,27 +333,3 @@ for (let badeseen of BADESEEN) {
 L.control.scale({
     imperial: false,
 }).addTo(map);
-
-
-
-//Kommentare aus der start-Seite
-/* Pulldownmenü Code
-//Pulldown für Navigation
-let pulldown = document.querySelector("#pulldown");
-for (let etappe of ETAPPEN) {
-    //console.log(etappe);
-    let status = "";
-    if (etappe.nr == "20") {
-        status = "selected";
-    }
-    pulldown.innerHTML += `<option ${status} value="${etappe.user}">Etappe ${etappe.nr}: ${etappe.etappe}</option>`
-}
-
-// auf Änderungen im Pulldown reagieren
-pulldown.onchange = function(evt) {
-    //console.log(pulldown.value);
-    let url = `https://${pulldown.value}.github.io/biketirol`;
-    //console.log(url);
-    window.location.href = url;
-}
-*/
