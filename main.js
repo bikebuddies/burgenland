@@ -256,25 +256,25 @@ const STAEDTE = [
         title: "Eisenstadt",
         lat: 47.84651920035177,
         lng: 16.52731717127831,
-        wikipedia: "https://de.wikipedia.org/wiki/Eisenstadt"//Links raus oder anpassen?
+        wikipedia: "https://de.wikipedia.org/wiki/Eisenstadt"
     },
     {
         title: "Neusiedl am See",
         lat: 47.94831935218377,
         lng: 16.850801413360713,
-        wikipedia: "https://de.wikipedia.org/wiki/Neusiedl_am_See" //Links raus oder anpassen?
+        wikipedia: "https://de.wikipedia.org/wiki/Neusiedl_am_See"
     },
     {
         title: "Oberwart",
         lat: 47.29477213220548,
         lng: 16.200854006181853,
-        wikipedia: "https://de.wikipedia.org/wiki/Oberwart"//Links raus oder anpassen?
+        wikipedia: "https://de.wikipedia.org/wiki/Oberwart"
     },
     {
         title: "Pinkafeld",
         lat: 47.374107766607914,
         lng: 16.123038801200657,
-        wikipedia: "https://de.wikipedia.org/wiki/Pinkafeld"//Links raus oder anpassen?
+        wikipedia: "https://de.wikipedia.org/wiki/Pinkafeld"
     },
 ]
 
@@ -333,27 +333,3 @@ for (let badeseen of BADESEEN) {
 L.control.scale({
     imperial: false,
 }).addTo(map);
-
-
-
-//Kommentare aus der start-Seite
-/* Pulldownmenü Code
-//Pulldown für Navigation
-let pulldown = document.querySelector("#pulldown");
-for (let etappe of ETAPPEN) {
-    //console.log(etappe);
-    let status = "";
-    if (etappe.nr == "20") {
-        status = "selected";
-    }
-    pulldown.innerHTML += `<option ${status} value="${etappe.user}">Etappe ${etappe.nr}: ${etappe.etappe}</option>`
-}
-
-// auf Änderungen im Pulldown reagieren
-pulldown.onchange = function(evt) {
-    //console.log(pulldown.value);
-    let url = `https://${pulldown.value}.github.io/biketirol`;
-    //console.log(url);
-    window.location.href = url;
-}
-*/
