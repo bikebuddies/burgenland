@@ -9,7 +9,7 @@ let map = L.map("map", {
     fullscreenControl: true
 }).setView([
     steinberg.lat, steinberg.lng
-], 8.5);
+], 8);
 
 // thematische Layer
 let themaLayer = {
@@ -41,7 +41,7 @@ let layerControl = L.control.layers({
 var miniMap = new L.Control.MiniMap(
     L.tileLayer.provider("BasemapAT.basemap"), {
     toggleDisplay: true,
-    minimized: true
+    minimized: false
 }
 ).addTo(map);
 
