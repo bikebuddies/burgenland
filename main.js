@@ -285,7 +285,7 @@ for (let stadt of STAEDTE) {
     let marker = L.marker([stadt.lat, stadt.lng])
         .addTo(map)
         .bindPopup(`<b>${stadt.title}</b> <br>
-    <a href="${stop.wikipedia}">Wikipedia</a>
+    <a href="${stadt.wikipedia}">Wikipedia</a>
     `)
 };
 
