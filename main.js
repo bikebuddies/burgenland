@@ -37,6 +37,9 @@ let layerControl = L.control.layers({
     "Badeseen": themaLayer.badeseen,
 }).addTo(map);
 
+// Layer beim Besuch auf der Seite ausklappen
+layerControl.expand();
+
 // Instanz Leaflet MiniMap
 var miniMap = new L.Control.MiniMap(
     L.tileLayer.provider("BasemapAT.basemap"), {
@@ -95,11 +98,9 @@ async function showForecast(url, latlng) {
 
     // Wettersymbole hinzufügen
     for (let i = 0; i <= 24; i += 3) {
-        //console.log(timeseries[i]);
         let icon = timeseries[i].data.next_1_hours.summary.symbol_code;
         let img = `icons/${icon}.svg`;
         markup += `<img src="${img}" style="width:32px;" title="${timeseries[i].time.toLocaleString()}">`
-        //console.log(icon, img);
     }
     L.popup().setLatLng(latlng).setContent(markup).openOn(themaLayer.forecast);
 }
