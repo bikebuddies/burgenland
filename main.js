@@ -1,7 +1,7 @@
 // Zentrum Karte Objekt
 let steinberg = {
-    lat: 47.4744090679682,
-    lng: 16.487984334978034,
+    lat: 47.47440,
+    lng: 16.80000,
 }
 
 // Karte initialisieren und Fullscreen Control 
@@ -9,7 +9,7 @@ let map = L.map("map", {
     fullscreenControl: true
 }).setView([
     steinberg.lat, steinberg.lng
-], 8);
+], 9);
 
 // thematische Layer
 let themaLayer = {
@@ -20,6 +20,7 @@ let themaLayer = {
     jubilaeum: L.featureGroup(),
     forecast: L.featureGroup(),
     badeseen: L.featureGroup(),
+    eisdielen: L.featureGroup()    
 }
 
 // Hintergrundlayer 
@@ -35,6 +36,7 @@ let layerControl = L.control.layers({
     "Jubiläum-Radweg": themaLayer.jubilaeum.addTo(map),
     "Wettervorhersage MET Norwag": themaLayer.forecast,
     "Badeseen": themaLayer.badeseen,
+    "Eisdielen": themaLayer.eisdielen,
 }).addTo(map);
 
 // Layer beim Besuch auf der Seite ausklappen
@@ -329,7 +331,50 @@ for (let badeseen of BADESEEN) {
     `)
 };
 
+//Eisdielen
+const EISDIELEN = [
+    {
+        title: "Der Eismacher Neusiedl",
+        lat: 47.9302870573718, 
+        lng: 16.835787608728065,
+    },
+    {
+        title: "Judith Eiscafé Konditorei",
+        lat: 47.75262172309752, 
+        lng: 16.43678286260615,
+    },
+    {
+        title: "Der Eismacher Kitzwögerer",
+        lat: 47.41066218237094,
+        lng: 16.418757725290323,
+    },
+    {
+        title: "Eisgreissler Manufaktur",
+        lat: 47.53536262226947,
+        lng: 16.15635449007364,
+    },
+    {
+        title: "Eiscafé La Piazza",
+        lat: 47.81432918584627,
+        lng: 16.242839994204992,
+    }
+];
+
+for (let eisdielen of EISDIELEN) {
+    L.marker([eisdielen.lat, eisdielen.lng], {
+        icon: L.icon({
+            iconUrl: `icons/icecream.png`,
+            popupAnchor: [0, -37],
+            iconAnchor: [16, 37],
+        })
+    })
+        .addTo(themaLayer.eisdielen)
+        .bindPopup(`<b>${eisdielen.title}</b> <br>
+    `)
+};
+
 // Maßstab
 L.control.scale({
     imperial: false,
 }).addTo(map);
+
